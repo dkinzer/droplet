@@ -1,0 +1,12 @@
+<?php
+/**
+ * @file
+ * This is the install file for stub module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function droplet_install() {
+  variable_set('site_name', "Travis-CI and Drupal: Perfect Together.");
+}

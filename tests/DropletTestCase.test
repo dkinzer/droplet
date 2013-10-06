@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Smell test for the Droplet module.
+ */
+class DropletTestCase extends DrupalWebTestCase {
+
+  /**
+   * Overrides parent::setUp().
+   */
+  public function setUp() {
+    parent::setUp(array('droplet'));
+  }
+
+  /**
+   * Verify that site_name was changed.
+   */
+  public function testSiteName() {
+    $actual = variable_get('site_name', '');
+    $expected = "Travis-CI and Drupal: Perfect Together.";
+
+    $this->assertEqual($actual, $expected,
+      "The site_name has been set to the expected value.");
+  }
+}
+
