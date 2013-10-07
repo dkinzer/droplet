@@ -35,13 +35,13 @@ install:
 
 # Build the test site (there are many ways of accomplishing this step).
 before_script:
-  - drush make includes/droplet.make build
+  - drush --yes make includes/droplet.make build
   - mkdir -p $CUSTOM_MODULE_PATH
   - git archive $(git rev-parse --abbrev-ref HEAD) | tar -x -C $CUSTOM_MODULE_PATH
   - cd build
-  - drush site-install gush --db-url="mysql://$DB_USERNAME@127.0.0.1/$DATABASE"
+  - drush --yes site-install gush --db-url="mysql://$DB_USERNAME@127.0.0.1/$DATABASE"
 
 
 # Test the build.
 script:
-  - drush test-run DropletTestCase
+  - drush --yes test-run DropletTestCase
