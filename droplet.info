@@ -2,3 +2,5 @@ name = Droplet
 description = Example module for setting up Travis-CI for a Drupal module.
 version = 0.1
 core = 7.x
+
+files[] = tests/DropletTestCase.test

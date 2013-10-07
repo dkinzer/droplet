@@ -22,7 +22,7 @@ class DropletTestCase extends DrupalWebTestCase {
    * Overrides parent::setUp().
    */
   public function setUp() {
-    parent::setUp(array('droplet'));
+    parent::setUp('droplet');
   }
 
   /**
