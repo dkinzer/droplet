@@ -4,7 +4,19 @@
  * @file
  * Smell test for the Droplet module.
  */
+
 class DropletTestCase extends DrupalWebTestCase {
+
+  /**
+   * Overrides parent::getInfo().
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Droplet Tests',
+      'description' => 'Droplet Module Functional Tests.',
+      'group' => 'Drupaldelphia',
+    );
+  }
 
   /**
    * Overrides parent::setUp().
@@ -24,4 +36,3 @@ class DropletTestCase extends DrupalWebTestCase {
       "The site_name has been set to the expected value.");
   }
 }
-
