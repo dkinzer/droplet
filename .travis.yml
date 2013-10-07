@@ -7,30 +7,38 @@ php:
  - '5.3'
 
 env:
- - CUSTOM_MODULE_PATH='build/sites/all/modules/custom' DATABASE='drupal' DB_USERNAME='root' DB_ENCODE='utf8'
+  global:
+    - CUSTOM_MODULE_PATH='build/sites/all/modules/custom'
+    - DATABASE='drupal'
+    - DB_USERNAME='root'
+    - DB_ENCODE='utf8'
 
 mysql:
- database: $DATABASE
- username: $DB_USERNAME
- encoding: $DB_ENCODE
+  database: $DATABASE
+  username: $DB_USERNAME
+  encoding: $DB_ENCODE
+
 
 # Build fails if composer is not updated to latest version.
 before_install:
   - composer self-update
+  - pear channel-discover pear.drush.org
   
-step0:
+
 # Prepare to build a dummy site.
- - pear channel-discover pear.drush.org
- - pear install drush/drush
+install:
+  - pear install drush/drush
 
-step1:
+
 # Build the site (There are many ways of accomplishing this).
- - drush make includes/droplet.make build
- - mkdir -p $CUSTOM_MODULE_PATH
- - git archive $(git rev-parse --abbrev-ref HEAD) | tar -x -C $CUSTOM_MODULE_PATH
- - cd build
- - drush site-install gush --db-url="mysql://$DB_USERNAME@127.0.0.1/$DATABASE"
+before_script:
+  - drush make includes/droplet.make build
+  - mkdir -p $CUSTOM_MODULE_PATH
+  - git archive $(git rev-parse --abbrev-ref HEAD) | tar -x -C $CUSTOM_MODULE_PATH
+  - cd build
+  - drush site-install gush --db-url="mysql://$DB_USERNAME@127.0.0.1/$DATABASE"
 
-step3:
+
 # Test the build.
- - drush test-run DropletTestCase
+script:
+  - drush test-run DropletTestCase
