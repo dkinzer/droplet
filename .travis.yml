@@ -14,6 +14,10 @@ mysql:
  username: $DB_USERNAME
  encoding: $DB_ENCODE
 
+# Build fails if composer is not updated to latest version.
+before_install:
+  - composer self-update
+  
 step0:
 # Prepare to build a dummy site.
  - pear channel-discover pear.drush.org
