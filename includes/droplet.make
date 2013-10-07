@@ -3,7 +3,7 @@ api = 2
 
 projects[] = drupal
 
-projects[droplet][type] = profile
-projects[droplet][download][type] = git
-projects[droplet][download][url] = git://github.com/dkinzer/gush.git
-projects[droplet][download][revision] = master
+projects[gush][type] = profile
+projects[gush][download][type] = git
+projects[gush][download][url] = git://github.com/dkinzer/gush.git
+projects[gush][download][revision] = master
