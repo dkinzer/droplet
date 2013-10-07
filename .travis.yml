@@ -1,7 +1,9 @@
 # There are no required fields for the .travis.yml
 # If this file were empty it would still be valid.
 #
-# The Travis
+
+# A test matrix is possible in Travis by supplying multiple environment
+# variables and language versions.
 language: php
 php:
  - '5.3'
@@ -25,12 +27,13 @@ before_install:
   - pear channel-discover pear.drush.org
   
 
-# Prepare to build a dummy site.
+# Prepare to build a test site by installing Drush.
 install:
   - pear install drush/drush
+  - phpenv rehash
 
 
-# Build the site (There are many ways of accomplishing this).
+# Build the test site (there are many ways of accomplishing this step).
 before_script:
   - drush make includes/droplet.make build
   - mkdir -p $CUSTOM_MODULE_PATH
