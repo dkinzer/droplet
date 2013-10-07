@@ -44,4 +44,5 @@ before_script:
 
 # Test the build.
 script:
+  - drush --yes en simpletest
   - drush --yes test-run DropletTestCase
