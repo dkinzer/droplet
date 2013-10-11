@@ -40,3 +40,9 @@ before_script:
   - git archive $(git rev-parse --abbrev-ref HEAD) | tar -x -C $CUSTOM_MODULE_PATH
   - cd build
   - drush --yes site-install gush --db-url="mysql://$DB_USERNAME@127.0.0.1/$DATABASE"
+
+
+# Test the build.
+script:
+  - drush --yes en simpletest
+  - drush --yes test-run DropletTestCase
