@@ -2,3 +2,9 @@
 # If this file were empty it would still be valid.
 #
 
+# A test matrix is possible in Travis by supplying multiple environment
+# variables and language versions.
+language: php
+php:
+ - '5.3'
+
