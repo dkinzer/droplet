@@ -2,3 +2,15 @@
 # If this file were empty it would still be valid.
 #
 
+# A test matrix is possible in Travis by supplying multiple environment
+# variables and language versions.
+language: php
+php:
+ - '5.3'
+
+env:
+  global:
+    - CUSTOM_MODULE_PATH='build/sites/all/modules/custom'
+    - DATABASE='drupal'
+    - DB_USERNAME='root'
+    - DB_ENCODE='utf8'
