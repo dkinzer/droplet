@@ -2,3 +2,41 @@
 # If this file were empty it would still be valid.
 #
 
+# A test matrix is possible in Travis by supplying multiple environment
+# variables and language versions.
+language: php
+php:
+ - '5.3'
+
+env:
+  global:
+    - CUSTOM_MODULE_PATH='build/sites/all/modules/custom'
+    - DATABASE='drupal'
+    - DB_USERNAME='root'
+    - DB_ENCODE='utf8'
+
+mysql:
+  database: $DATABASE
+  username: $DB_USERNAME
+  encoding: $DB_ENCODE
+
+
+# Build fails if composer is not updated to latest version.
+before_install:
+  - composer self-update
+  - pear channel-discover pear.drush.org
+  
+
+# Prepare to build a test site by installing Drush.
+install:
+  - pear install drush/drush
+  - phpenv rehash
+
+
+# Build the test site (there are many ways of accomplishing this step).
+before_script:
+  - drush --yes make includes/droplet.make build
+  - mkdir -p $CUSTOM_MODULE_PATH
+  - git archive $(git rev-parse --abbrev-ref HEAD) | tar -x -C $CUSTOM_MODULE_PATH
+  - cd build
+  - drush --yes site-install gush --db-url="mysql://$DB_USERNAME@127.0.0.1/$DATABASE"
