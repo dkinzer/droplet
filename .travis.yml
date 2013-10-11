@@ -25,3 +25,9 @@ mysql:
 before_install:
   - composer self-update
   - pear channel-discover pear.drush.org
+  
+
+# Prepare to build a test site by installing Drush.
+install:
+  - pear install drush/drush
+  - phpenv rehash
