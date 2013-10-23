@@ -17,6 +17,12 @@ run git clone https://github.com/dkinzer/droplet
 run drush --yes make droplet/includes/droplet.make
 
 # Install drupal
-run apt-get install -y php5-mysql mysql-client mysql-server
-run mysql -u root -p create drupal
+run apt-get install -y --force-yes mysql-server
+run /usr/sbin/mysqld &
+run mysqladmin -u root -p create drupal
+run drush site-install --db-url=mysql://root@localhost/drupal
 
+expose 3306
+expose 80
+
+entrypoint hhvm -m server
